@@ -69,17 +69,12 @@ while True:
     print('Mean =', cv2.mean(bf8_2, im3)[:1])
     print('Standard Deviation =', cv2.meanStdDev(bf8_2, im3)[:1])
 
-
-
-
     with open('Results1.csv', 'a') as csvfile:
         fieldnames = ['Mean']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         #writer.writeheader()
         writer.writerow({'Mean': cv2.mean(bf8_2, im3)[:1]})
-
-
 
     # detect waitkey of q to quit
     key = cv2.waitKey(1) & 0xFF
