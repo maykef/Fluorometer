@@ -6,6 +6,8 @@ import csv
 
 cap = cv2.VideoCapture(0 + cv2.CAP_V4L)
 
+cap2 = cv2.VideoCapture(2 + cv2.CAP_V4L)
+
 # CU51 has the following possible resolution settings
 # 640 x 480
 # 1280 x 720
@@ -34,21 +36,21 @@ _, frame = cap.read()
 bf81 = np.array(frame//16, dtype = np.uint8)
 
 # Create the mask
-# binary = cv2.imread('Masked_Image.png')
-# binary = binary[:,:,1]
-_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
+binary = cv2.imread('Masked_Image.png')
+binary = binary[:,:,1]
+#_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 print('Width = ', cap.get(3),' Height = ', cap.get(4),' fps = ', cap.get(5))
 
 original_stdout = sys.stdout
 
 while True:
     _, frame = cap.read()
+    _, frame2 = cap2.read()
     # CU51 camera
     # convert from 12 bit (4096 levels) to 8 bit (256 levels) 255/4096 = 0.06226
     # bf8 = np.array(frame,dtype = np.uint16) # Using here unit16
 
     bf8 = np.array(frame//16, dtype = np.uint8)
-
     im3 = cv2.bitwise_and(bf8,binary)
     im3[binary==0] = 0
 
@@ -56,11 +58,13 @@ while True:
     bf8_2 = cv2.normalize(im3, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     # bf8_3 = cv2.normalize(bf8, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     bf8_2_color = cv2.applyColorMap(im3, cv2.COLORMAP_JET)
+    bf8_3_color = cv2.applyColorMap(frame2, cv2.COLORMAP_JET)
     cv2.imwrite('Masked_Image.png', binary)
 
     # Display the image, print image size and fps and save each frame
     #cv2.imshow('Original Frame', frame)
     cv2.imshow('Masked_Image', bf8_2)
+    cv2.imshow("lepton", cv2.resize(bf8_3_color, (640, 480)))
     cv2.imshow("Opencv Video See3Cam_CU51 Color", bf8_2_color)
     #cv2.imshow('Opencv Video See3Cam_CU51', bf8_3)
     cv2.imshow('Opencv Binary Image', binary)
