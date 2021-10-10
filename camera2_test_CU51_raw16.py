@@ -18,7 +18,7 @@ cols = 1080
 # Set parameters for the camera
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, cols)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, rows)
-cap.set(cv2.CAP_PROP_CONVERT_RGB, False) # turn off RGB conversion
+cap.set(cv2.CAP_PROP_CONVERT_RGB, 0) # turn off RGB conversion
 fps = cap.get(cv2.CAP_PROP_FPS)
 timestamp = cap.get(cv2.CAP_PROP_POS_MSEC) # always 40
 #cap.set(cv2.CAP_PROP_BRIGHTNESS, 10)
