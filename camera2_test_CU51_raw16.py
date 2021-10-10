@@ -12,8 +12,8 @@ cap = cv2.VideoCapture(0 + cv2.CAP_V4L)
 # 1920 x 1080
 # 2592 x 1944
 
-rows = 1920
-cols = 1080
+rows = 640
+cols = 480
 
 # Set parameters for the camera
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, cols)
