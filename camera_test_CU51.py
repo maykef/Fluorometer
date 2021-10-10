@@ -18,12 +18,11 @@ cols = 480
 # Set parameters for the camera
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, cols)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, rows)
-cap.set(cv2.CAP_PROP_CONVERT_RGB, False) # turn off RGB conversion
+cap.set(cv2.CAP_PROP_CONVERT_RGB, 0) # turn off RGB conversion
 cap.set(cv2.CAP_PROP_BRIGHTNESS, 5)
 #cap.set(cv2.CAP_PROP_EXPOSURE, 1) #Not Supported
 cap.set(cv2.CAP_PROP_FPS, 30)
-cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc(*'YV16'))
-fourcc = cv2.VideoWriter.fourcc(*'XVID')
+cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc(*'Y16 '))
 #out = cv2.VideoWriter('fluorescence_1.raw',fourcc, int(cap.get(5)), (int(cap.get(4)), int(cap.get(3))))
 
 # Grab capture value (into null) and frame
