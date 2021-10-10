@@ -42,7 +42,7 @@ while True:
     bf8 = np.array(frame//16, dtype = np.uint8)
     #bf8 = cv2.convertScaleAbs(frame, 0.06226)
 
- dt = str(datetime.now())
+    dt = str(datetime.now())
 
     # Write timestamp
     cv2.putText(bf8,dt,
