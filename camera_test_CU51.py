@@ -36,12 +36,16 @@ _, frame = cap.read()
 bf81 = np.array(frame//16, dtype = np.uint8)
 
 # Create the mask
-binary = cv2.imread('Masked_Image.png')
-binary = binary[:,:,1]
-#_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
+# Gray out both binaries and enable _, binary in order to create the mask.
+# after the mask has been obtained, gray out _, binary and enable both binary to
+#retrieve the mask.
+#binary = cv2.imread('Masked_Image.png')
+#binary = binary[:,:,1]
+_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 print('Width = ', cap.get(3),' Height = ', cap.get(4),' fps = ', cap.get(5))
 
 original_stdout = sys.stdout
+
 
 while True:
     _, frame = cap.read()
@@ -55,29 +59,29 @@ while True:
     im3[binary==0] = 0
 
     # Normalize the image
-    bf8_2 = cv2.normalize(im3, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-    # bf8_3 = cv2.normalize(bf8, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+    #bf8_2 = cv2.normalize(im3, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+    #bf8_3 = cv2.normalize(bf8, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     bf8_2_color = cv2.applyColorMap(im3, cv2.COLORMAP_JET)
     bf8_3_color = cv2.applyColorMap(frame2, cv2.COLORMAP_JET)
     cv2.imwrite('Masked_Image.png', binary)
 
     # Display the image, print image size and fps and save each frame
     #cv2.imshow('Original Frame', frame)
-    cv2.imshow('Masked_Image', bf8_2)
+    cv2.imshow('Masked_Image', im3)
     cv2.imshow("lepton", cv2.resize(bf8_3_color, (640, 480)))
     cv2.imshow("Opencv Video See3Cam_CU51 Color", bf8_2_color)
-    #cv2.imshow('Opencv Video See3Cam_CU51', bf8_3)
+    #cv2.imshow('Opencv Video See3Cam_CU51', bf8)
     cv2.imshow('Opencv Binary Image', binary)
     print('Pixels =', cv2.countNonZero(im3))
-    print('Mean =', cv2.mean(bf8_2, im3)[:1])
-    print('Standard Deviation =', cv2.meanStdDev(bf8_2, im3)[:1])
+    print('Mean =', cv2.mean(bf8, im3)[:1])
+    print('Standard Deviation =', cv2.meanStdDev(im3, im3)[:1])
 
     with open('Results1.csv', 'a') as csvfile:
         fieldnames = ['Mean']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         #writer.writeheader()
-        writer.writerow({'Mean': cv2.mean(bf8_2, im3)[:1]})
+        writer.writerow({'Mean': cv2.mean(bf8, im3)[:1]})
 
     # detect waitkey of q to quit
     key = cv2.waitKey(1) & 0xFF
