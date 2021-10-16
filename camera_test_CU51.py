@@ -71,17 +71,17 @@ while True:
     cv2.imshow("lepton", cv2.resize(bf8_3_color, (640, 480)))
     cv2.imshow("Opencv Video See3Cam_CU51 Color", bf8_2_color)
     #cv2.imshow('Opencv Video See3Cam_CU51', bf8)
+    Mean = cv2.mean(bf8, im3)[:1]
     cv2.imshow('Opencv Binary Image', binary)
     print('Pixels =', cv2.countNonZero(im3))
-    print('Mean =', cv2.mean(bf8, im3)[:1])
+    print('Mean =', Mean[:1])
     print('Standard Deviation =', cv2.meanStdDev(im3, im3)[:1])
 
-    with open('Results1.csv', 'a') as csvfile:
+    with open('results.csv', 'a') as csvfile:
         fieldnames = ['Mean']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         #writer.writeheader()
-        writer.writerow({'Mean': cv2.mean(bf8, im3)[:1]})
+        writer.writerow({'Mean': Mean})
 
     # detect waitkey of q to quit
     key = cv2.waitKey(1) & 0xFF
