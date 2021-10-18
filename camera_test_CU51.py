@@ -4,7 +4,7 @@ import sys
 import csv
 
 
-cap = cv2.VideoCapture(0 + cv2.CAP_V4L)
+cap = cv2.VideoCapture(1 + cv2.CAP_V4L)
 
 cap2 = cv2.VideoCapture(2 + cv2.CAP_V4L)
 
@@ -39,9 +39,9 @@ bf81 = np.array(frame//16, dtype = np.uint8)
 # Gray out both binaries and enable _, binary in order to create the mask.
 # after the mask has been obtained, gray out _, binary and enable both binary to
 #retrieve the mask.
-#binary = cv2.imread('Masked_Image.png')
-#binary = binary[:,:,1]
-_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
+binary = cv2.imread('Masked_Image.png')
+binary = binary[:,:,1]
+#_, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 print('Width = ', cap.get(3),' Height = ', cap.get(4),' fps = ', cap.get(5))
 
 original_stdout = sys.stdout
@@ -63,7 +63,7 @@ while True:
     #bf8_3 = cv2.normalize(bf8, None, 0.0, 1.0, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     bf8_2_color = cv2.applyColorMap(im3, cv2.COLORMAP_JET)
     bf8_3_color = cv2.applyColorMap(frame2, cv2.COLORMAP_JET)
-    cv2.imwrite('Masked_Image.png', binary)
+    #cv2.imwrite('Masked_Image.png', binary)
 
     # Display the image, print image size and fps and save each frame
     #cv2.imshow('Original Frame', frame)
