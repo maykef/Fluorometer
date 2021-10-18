@@ -1,5 +1,5 @@
 # Fluorometer
 
-Flies for the DIY Fluorometer project.
+Files for the DIY Fluorometer project.
 
 More description and details to come.
