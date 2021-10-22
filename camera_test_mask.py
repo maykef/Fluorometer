@@ -41,6 +41,7 @@ while True:
     im3 = cv2.bitwise_and(bf81,binary)
     im3[binary==0] = 0
     cv2.imwrite('Masked_Image.png', binary)
+    print("Mask Saved")
     
 cap.release()
 cv2.destroyAllWindows()
