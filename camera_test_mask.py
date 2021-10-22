@@ -34,14 +34,10 @@ bf81 = np.array(frame//16, dtype = np.uint8)
 # Create the mask
 _, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 
-
-
-while True:
-    _, frame = cap.read()
-    im3 = cv2.bitwise_and(bf81,binary)
-    im3[binary==0] = 0
-    cv2.imwrite('Masked_Image.png', binary)
-    print("Mask Saved")
+im3 = cv2.bitwise_and(bf81,binary)
+im3[binary==0] = 0
+cv2.imwrite('Masked_Image.png', binary)
+print("Mask Saved")
     
 cap.release()
 cv2.destroyAllWindows()
