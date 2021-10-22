@@ -30,6 +30,7 @@ _, frame = cap.read()
 # convert from 12 bit (4096 levels) to 8 bit (256 levels) 255/4096 = 0.06226
 bf81 = np.array(frame//16, dtype = np.uint8)
 
+
 # Create the mask
 _, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 
@@ -37,6 +38,8 @@ _, binary = cv2.threshold(bf81, 30, 255, cv2.THRESH_BINARY)
 
 while True:
     _, frame = cap.read()
+    im3 = cv2.bitwise_and(bf8,binary)
+    im3[binary==0] = 0
     cv2.imwrite('Masked_Image.png', binary)
 
     # detect waitkey of q to quit
