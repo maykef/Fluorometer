@@ -41,8 +41,6 @@ while True:
     im3 = cv2.bitwise_and(bf8,binary)
     im3[binary==0] = 0
     cv2.imwrite('Masked_Image.png', binary)
-
-    # detect waitkey of q to quit
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord("q"):
-        break
+    
+cap.release()
+cv2.destroyAllWindows()
