@@ -36,9 +36,10 @@ _, frame = cap.read()
 # convert from 12 bit (4096 levels) to 8 bit (256 levels) 255/4096 = 0.06226
 bf81 = np.array(frame//16, dtype = np.uint8)
 # Create the mask
-_, binary = cv2.threshold(bf81, 70, 255, cv2.THRESH_BINARY)
+_, binary = cv2.threshold(bf81, 60, 255, cv2.THRESH_BINARY)
 im3 = cv2.bitwise_and(bf81,binary)
 im3[binary==0] = 0
+cv2.imshow('Image', binary)
 cv2.imwrite('Masked_Image.png', binary)
 print("Mask Saved")
 time.sleep(3)
