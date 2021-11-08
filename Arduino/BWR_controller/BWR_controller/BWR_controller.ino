@@ -56,12 +56,36 @@ void loop() {
         Serial.print("The pulse has an intensity of 1015 umoles");
         break;
       case 'd':
-        analogWrite(LED_PIN_Blue, 219);  //  20% or 100 umoles
-        analogWrite(LED_PIN_White, 192);  // 20% or 100 umoles
-        analogWrite(LED_PIN_Red, 156);  //   60% or 300 umoles
+        analogWrite(LED_PIN_Blue, 218);  //  20% or 100 umoles
+        analogWrite(LED_PIN_White, 191);  // 20% or 100 umoles
+        analogWrite(LED_PIN_Red, 145);  //   60% or 300 umoles
         Serial.print("The lights have an intensity of 500 umoles");
         break;
       case '@':
+        analogWrite(LED_PIN_Blue, 250);  // Light Off
+        analogWrite(LED_PIN_White, 250);  // Light Off
+        analogWrite(LED_PIN_Red, 250);  // Light Off 
+        Serial.print("The lights are off");
+        break;
+        case '2': 
+        analogWrite(LED_PIN_Blue_2, 75);  // Light On at 
+        delay(600);                 // length of pulse in ms
+        analogWrite(LED_PIN_Blue_2, 250);  // Ligh off
+        Serial.println("Initial Pulse");
+        delay(10000);
+        analogWrite(LED_PIN_Blue, 218);  //  20% or 100 umoles
+        analogWrite(LED_PIN_White, 191);  // 20% or 100 umoles
+        analogWrite(LED_PIN_Red, 145);  //   60% or 300 umoles
+        Serial.println("Actinic Light On");
+        delay(10000);
+        for (int i = 0; i < 25; i++)
+        {
+          analogWrite(LED_PIN_Blue_2, 75);  // Light On at 
+          delay(600);                 // length of pulse in ms
+          analogWrite(LED_PIN_Blue_2, 250);  // Ligh off
+          Serial.println("The pulse has an intensity of 1015 umoles");
+          delay(120000);
+        }
         analogWrite(LED_PIN_Blue, 250);  // Light Off
         analogWrite(LED_PIN_White, 250);  // Light Off
         analogWrite(LED_PIN_Red, 250);  // Light Off 
