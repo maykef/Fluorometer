@@ -6,7 +6,7 @@ import time
 import serial
 
 
-cap = cv2.VideoCapture(1 + cv2.CAP_V4L)
+cap = cv2.VideoCapture(0 + cv2.CAP_V4L)
 
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 
@@ -27,7 +27,7 @@ cap.set(cv2.CAP_PROP_BRIGHTNESS, 5)
 cap.set(cv2.CAP_PROP_FPS, 30)
 cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc(*'Y16 '))
 
-# Grab capture value (into null) and frame
+
 
 
 ser.write(b'1')
@@ -36,7 +36,7 @@ _, frame = cap.read()
 # convert from 12 bit (4096 levels) to 8 bit (256 levels) 255/4096 = 0.06226
 bf81 = np.array(frame//16, dtype = np.uint8)
 # Create the mask
-_, binary = cv2.threshold(bf81, 120, 255, cv2.THRESH_BINARY)
+_, binary = cv2.threshold(bf81, 190, 255, cv2.THRESH_BINARY)
 im3 = cv2.bitwise_and(bf81,binary)
 im3[binary==0] = 0
 cv2.imwrite('Masked_Image.png', binary)

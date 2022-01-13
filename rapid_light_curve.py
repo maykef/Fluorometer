@@ -9,11 +9,11 @@ try:
 except ImportError:
   from Queue import Queue
 
-#ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 
 def camera_monochrome():
     i = 0
-    cap = cv2.VideoCapture(0 + cv2.CAP_V4L)
+    cap = cv2.VideoCapture(1 + cv2.CAP_V4L)
     print('Width = ', cap.get(3), ' Height = ', cap.get(4), ' fps = ', cap.get(5))
     rows = 640
     cols = 480
@@ -163,7 +163,7 @@ def main():
     libuvc.uvc_exit(ctx)
 
 if __name__ == "__main__":
-    #ser.write(b'2')
+    ser.write(b'1')
     p1 = Process(target=camera_monochrome)
     p1.start()
     p2 = Process(target=main)
