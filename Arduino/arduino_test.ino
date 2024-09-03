@@ -4,20 +4,12 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
 }
 
-void pulse(int duration) {
-  digitalWrite(LED_PIN, HIGH);
-  delayMicroseconds(duration);
-  digitalWrite(LED_PIN, LOW);
-}
-
 void loop() {
-  // First pulse
-  pulse(100);  // 100 microsecond pulse
+  // Generate a 110 microsecond pulse
+  digitalWrite(LED_PIN, HIGH);
+  delayMicroseconds(110);
+  digitalWrite(LED_PIN, LOW);
 
-  delayMicroseconds(300);  // 300 microsecond delay
-
-  // Second pulse
-  pulse(100);  // 100 microsecond pulse
-
-  delay(1000);  // 1 second delay before next cycle
+  // Wait for the remainder of the second
+  delay(1000);  // This will actually result in a cycle slightly longer than 1 second
 }
